@@ -4,6 +4,9 @@ module.exports = {
 	darkMode: 'class',
 	theme: {
 		extend: {
+			gradientColorStops: {
+				checkGrad: ['hsl(192, 100%, 67%)', 'hsl(280, 87%, 65%)'],
+			},
 			colors: {
 				// light theme
 				veryLightGray: 'hsl(0, 0%, 98%)',
