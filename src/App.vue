@@ -5,7 +5,7 @@
 		<section
 			class="p-20 flex flex-col items-center justify-center bg-header-mobile-light md:bg-header-desktop-light dark:bg-header-mobile-dark bg-no-repeat bg-cover dark:md:bg-header-desktop-dark"
 		>
-			<div class="flex items-center justify-between w-[400px]">
+			<div class="flex items-center justify-between w-[400px] md:w-[600px]">
 				<h3 class="text-white font-normal uppercase tracking-widest text-3xl">
 					Todo
 				</h3>
@@ -14,7 +14,7 @@
 				</button>
 			</div>
 			<div
-				class="w-[400px] mt-7 p-4 flex items-center space-x-7 bg-white dark:bg-veryDarkDesaturatedBlue rounded-lg"
+				class="w-[400px] md:w-[660px] mt-7 p-4 flex items-center space-x-7 bg-veryLightGray dark:bg-veryDarkDesaturatedBlue rounded-lg"
 			>
 				<input type="checkbox" />
 				<input
@@ -26,18 +26,7 @@
 		</section>
 		<!-- section todos -->
 		<div class="z-20 -mt-14 flex justify-center">
-			<div
-				v-if="todos.length > 0"
-				class="bg-veryLightGray shadow-lg dark:bg-veryDarkDesaturatedBlue w-[400px] rounded-lg p-4"
-			>
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<TodoItem />
-				<!-- filter -->
-				<div class="mt-3 px-1 py-3 flex justify-around"></div>
-			</div>
+			<TodoTable />
 		</div>
 	</div>
 </template>
@@ -45,7 +34,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import darkMode from './composables/darkMode'
-import TodoItem from './components/TodoItem.vue'
+import TodoTable from './components/TodoTable.vue'
 
 const todos = ref([1, 2])
 
