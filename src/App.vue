@@ -5,7 +5,7 @@
 		<section
 			class="p-20 flex flex-col items-center justify-center bg-header-mobile-light md:bg-header-desktop-light dark:bg-header-mobile-dark bg-no-repeat bg-cover dark:md:bg-header-desktop-dark"
 		>
-			<div class="flex items-center justify-between w-[400px] md:w-[600px]">
+			<div class="flex items-center justify-between w-[450px] md:w-[600px]">
 				<h3 class="text-white font-normal uppercase tracking-widest text-3xl">
 					Todo
 				</h3>
@@ -14,11 +14,13 @@
 				</button>
 			</div>
 			<div
-				class="w-[400px] md:w-[660px] mt-7 p-4 flex items-center space-x-7 bg-veryLightGray dark:bg-veryDarkDesaturatedBlue rounded-lg"
+				class="w-[450px] md:w-[660px] mt-7 p-4 flex items-center space-x-7 bg-veryLightGray dark:bg-veryDarkDesaturatedBlue rounded-lg"
 			>
-				<input type="checkbox" />
+				<input v-model="store.newTodo.status" type="checkbox" />
 				<input
+					@keyup.enter="addTodo"
 					type="text"
+					v-model="store.newTodo.name"
 					class="text-veryDarkBlue dark:text-veryLightGray placeholder:text-veryDarkGreyishBlue dark:placeholder:text-veryLightGrayishBlue"
 					placeholder="enter Todo  "
 				/>
@@ -35,8 +37,13 @@
 import { computed, onMounted, ref } from 'vue'
 import darkMode from './composables/darkMode'
 import TodoTable from './components/TodoTable.vue'
+import useTodos from './store/useTodos'
 
-const todos = ref([1, 2])
+const store = useTodos()
+
+function addTodo() {
+	store.addTodo()
+}
 
 const isDarkMode = ref(null)
 const buttonImageUrl = computed(() => {

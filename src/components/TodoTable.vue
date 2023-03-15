@@ -1,37 +1,109 @@
 <template>
 	<div class="rounded-lg">
 		<table
-			class="bg-veryLightGray dark:bg-veryDarkBlue text-lg text-left w-[400px] md:w-[660px] text-gray-500 rounded-xl"
+			class="bg-veryLightGray dark:bg-veryDarkBlue text-lg text-left text-gray-500 rounded-xl"
 		>
-			<draggable v-model="todos">
-				<tbody>
-					<tr
-						v-for="todo in todos"
-						:key="todo.id"
-						class="border-b bg-veryLightGray dark:bg-veryDarkDesaturatedBlue shadow-lg dark:border-gray-700"
-					>
-						<th
-							scope="row"
-							class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+			<tbody>
+				<draggable
+					v-model="myTodos"
+					item-key="todo"
+					@start="drag = true"
+					@end="drag = false"
+				>
+					<template #item="todo">
+						<tr
+							class="border-b flex items-center bg-veryLightGray dark:bg-veryDarkDesaturatedBlue shadow-lg dark:border-gray-700"
 						>
-							<input type="checkbox" :checked="todo.status === 'complete'" />
-						</th>
-						<td class="py-4">{{ todo.name }}</td>
-					</tr>
-				</tbody>
-			</draggable>
+							<th
+								scope="row"
+								class="px-4 py-4 font-medium text-veryDarkGreyishBlue whitespace-nowrap dark:text-white"
+							>
+								<input
+									type="checkbox"
+									@click="markTodo(todo.element)"
+									:checked="todo.element.status === 'complete'"
+								/>
+							</th>
+							<td
+								:class="textStyle(todo.element)"
+								class="py-4 w-[400px] md:w-[600px] rounded"
+							>
+								{{ todo.element.name }}
+							</td>
+						</tr>
+					</template>
+				</draggable>
+			</tbody>
 		</table>
+		<div
+			class="hidden md:flex justify-between items-center rounded-b-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
+		>
+			<p class="text-md">{{ store.incomplete.length }} items left</p>
+			<div class="flex space-x-3">
+				<p
+					class="text-md hover:text-veryLightGray dark:hover:text-veryDarkGreyishBlue"
+				>
+					All
+				</p>
+				<p class="text-md">Active</p>
+				<p class="text-md">Completed</p>
+			</div>
+
+			<p class="text-md">Clear Completed</p>
+		</div>
+		<!-- mobile -->
+		<div
+			class="md:hidden w-[450px] flex justify-between items-center rounded-b-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
+		>
+			<p class="text-md">{{ store.incomplete.length }} items left</p>
+
+			<p class="text-md">Clear Completed</p>
+		</div>
+
+		<div
+			class="md:hidden w-[450px] flex items-center justify-center space-x-4 mt-4 rounded-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
+		>
+			<p
+				class="text-md hover:text-veryLightGray dark:hover:text-veryDarkGreyishBlue"
+			>
+				All
+			</p>
+			<p class="text-md">Active</p>
+			<p class="text-md">Completed</p>
+		</div>
 	</div>
 </template>
 
 <script setup>
 import draggable from 'vuedraggable'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import useTodos from '../store/useTodos'
 
-const todos = ref([
-	{ id: 1, name: 'Jog around the park 3x', status: 'complete' },
-	{ id: 1, name: '10 minutes meditation', status: 'complete' },
-	{ id: 1, name: 'Read for one hour', status: 'complete' },
-	{ id: 1, name: 'complete Todo App on frontend Mentor', status: 'complete' },
-])
+const drag = ref(false)
+
+const store = useTodos()
+
+const textStyle = (todo) => {
+	return todo.status === 'complete'
+		? 'line-through text-veryDarkGreyishBlueDM '
+		: 'text-veryDarkGreyishBlue whitespace-nowrap dark:text-veryLightGray'
+}
+
+const myTodos = computed({
+	get() {
+		return store.getTodos
+	},
+	set(value) {
+		store.updateTodos(value)
+	},
+})
+
+const markTodo = (todo) => {
+	const updatedTodo = {
+		...todo,
+		status: todo.status === 'complete' ? 'incomplete' : 'complete',
+	}
+	const index = store.todos.findIndex((t) => t.id === todo.id)
+	store.todos[index] = updatedTodo
+}
 </script>
