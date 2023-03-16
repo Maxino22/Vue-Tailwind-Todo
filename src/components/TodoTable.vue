@@ -41,15 +41,25 @@
 			<p class="text-md">{{ store.incomplete.length }} items left</p>
 			<div class="flex space-x-3">
 				<p
-					class="text-md hover:text-veryLightGray dark:hover:text-veryDarkGreyishBlue"
+					class="text-md cursor-pointer hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
 				>
 					All
 				</p>
-				<p class="text-md">Active</p>
-				<p class="text-md">Completed</p>
+				<p
+					@click="store.showActive"
+					class="text-md cursor-pointer hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
+				>
+					Active
+				</p>
+				<p
+					@click="store.showComplete"
+					class="text-md cursor-pointer hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
+				>
+					Completed
+				</p>
 			</div>
 
-			<p class="text-md">Clear Completed</p>
+			<p @click="store.clearComplete" class="text-md">Clear Completed</p>
 		</div>
 		<!-- mobile -->
 		<div
@@ -57,26 +67,31 @@
 		>
 			<p class="text-md">{{ store.incomplete.length }} items left</p>
 
-			<p class="text-md">Clear Completed</p>
+			<p @click="store.clearComplete" class="text-md">Clear Completed</p>
 		</div>
 
 		<div
 			class="md:hidden w-[450px] flex items-center justify-center space-x-4 mt-4 rounded-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
 		>
 			<p
-				class="text-md hover:text-veryLightGray dark:hover:text-veryDarkGreyishBlue"
+				class="text-md hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
 			>
 				All
 			</p>
-			<p class="text-md">Active</p>
-			<p class="text-md">Completed</p>
+			<p @click="store.showActive" class="text-md">Active</p>
+			<p
+				@click="store.showComplete"
+				class="text-md pointer dark:hover:text-veryDarkGreyishBlue"
+			>
+				Completed
+			</p>
 		</div>
 	</div>
 </template>
 
 <script setup>
 import draggable from 'vuedraggable'
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import useTodos from '../store/useTodos'
 
 const drag = ref(false)

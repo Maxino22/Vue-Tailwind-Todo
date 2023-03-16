@@ -30,6 +30,9 @@
 		<div class="z-20 -mt-14 flex justify-center">
 			<TodoTable />
 		</div>
+		<p class="text-center text-veryDarkGreyishBlueDM mt-2">
+			Drag and Drop to reorder list
+		</p>
 	</div>
 </template>
 
