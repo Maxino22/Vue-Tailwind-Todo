@@ -51,9 +51,9 @@ function addTodo() {
 const isDarkMode = ref(null)
 const buttonImageUrl = computed(() => {
 	if (isDarkMode.value) {
-		return 'images/icon-sun.svg'
+		return 'assets/images/icon-sun.svg'
 	} else {
-		return 'images/icon-moon.svg'
+		return 'assets/images/icon-moon.svg'
 	}
 })
 
