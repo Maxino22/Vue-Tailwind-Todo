@@ -46,13 +46,13 @@
 					All
 				</p>
 				<p
-					@click="store.showActive"
+					@click="showActive"
 					class="text-md cursor-pointer hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
 				>
 					Active
 				</p>
 				<p
-					@click="store.showComplete"
+					@click="showCompleted"
 					class="text-md cursor-pointer hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
 				>
 					Completed
@@ -78,9 +78,9 @@
 			>
 				All
 			</p>
-			<p @click="store.showActive" class="text-md">Active</p>
+			<p @click="showActive" class="text-md">Active</p>
 			<p
-				@click="store.showComplete"
+				@click="showCompleted"
 				class="text-md pointer dark:hover:text-veryDarkGreyishBlue"
 			>
 				Completed
@@ -111,6 +111,26 @@ const myTodos = computed({
 	set(value) {
 		store.updateTodos(value)
 	},
+})
+
+const showAll = () => {
+	store.Active = null
+	store.completed = null
+}
+
+const showActive = () => {
+	store.Active = store.todos.filter((todo) => todo.status !== 'complete')
+	store.completed = null
+}
+
+const showCompleted = () => {
+	store.completed = store.todos.filter((todo) => todo.status !== 'complete')
+	store.Active = null
+}
+
+// Watch for changes in store.active and store.completed
+watchEffect(() => {
+	showAll()
 })
 
 const markTodo = (todo) => {

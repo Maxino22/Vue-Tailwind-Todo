@@ -54,14 +54,6 @@ const useTodos = defineStore('todos', {
 				name: '',
 			}
 		},
-		showComplete() {
-			this.Active = false
-			this.completed = true
-		},
-		showActive() {
-			this.Active = true
-			this.completed = false
-		},
 		clearComplete() {
 			const filteredCompleted = this.todos.filter(
 				(todo) => todo.status !== 'complete'
