@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="text-veryDarkDesaturatedBlue dark:bg-veryDarkBlue dark:text-veryLightGray"
+		class="relative text-veryDarkDesaturatedBlue dark:bg-veryDarkBlue dark:text-veryLightGray"
 	>
 		<section
 			class="p-20 flex flex-col items-center justify-center bg-header-mobile-light md:bg-header-desktop-light dark:bg-header-mobile-dark bg-no-repeat bg-cover dark:md:bg-header-desktop-dark"
@@ -13,6 +13,15 @@
 					<img class="h-5" :src="buttonImageUrl" alt="" />
 				</button>
 			</div>
+			<transition name="error">
+				<div
+					v-if="TodoError"
+					class="absolute opacity-80 top-20 bg-red-500 rounded-md text-white text-center px-4 py-3"
+				>
+					Adding Todo Failed!! Please try again!!
+				</div>
+			</transition>
+			<div></div>
 			<div
 				class="w-[350px] md:w-[660px] mt-7 p-4 flex items-center space-x-7 bg-veryLightGray dark:bg-veryDarkDesaturatedBlue rounded-lg"
 			>
@@ -27,14 +36,19 @@
 			</div>
 		</section>
 		<!-- section todos -->
-		<div class="z-20 -mt-14 flex justify-center">
-			<TodoTable v-if="store.todos.length >= 1" />
-		</div>
-		<p
-			class="text-center text-veryDarkGreyishBlueDM dark:text-veryLightGrayishBlue mt-2"
-		>
-			Drag and Drop to reorder list
-		</p>
+		<transition name="switch" mode="out-in">
+			<div v-if="store.todos.length">
+				<div class="z-20 -mt-14 flex justify-center">
+					<TodoTable />
+				</div>
+				<p
+					class="text-center text-veryDarkGreyishBlueDM dark:text-veryLightGrayishBlue mt-2"
+				>
+					Drag and Drop to reorder list
+				</p>
+			</div>
+			<p v-else class="text-red-300 text-center">No todos to display</p>
+		</transition>
 	</div>
 </template>
 
@@ -44,9 +58,14 @@ import darkMode from './composables/darkMode'
 import TodoTable from './components/TodoTable.vue'
 import useTodos from './store/useTodos'
 
+const TodoError = ref(false)
 const store = useTodos()
 
 function addTodo() {
+	if (!store.newTodo.name) {
+		TodoError.value = true
+		setTimeout(() => (TodoError.value = false), 3000)
+	}
 	store.addTodo()
 }
 
@@ -75,3 +94,77 @@ onMounted(() => {
 	}
 })
 </script>
+
+<style>
+/* enyer */
+/* .error-enter-from {
+	opacity: 0;
+	transform: translateY(-60px);
+}
+.error-enter-to {
+	opacity: 1;
+	transform: translateY(0); */
+/* } */
+.error-enter-active {
+	/* transition: all 0.3s ease-in; */
+	animation: wobble 0.5s;
+}
+/* leave classes */
+.error-leave-from {
+	opacity: 1;
+	transform: translateY(0);
+}
+.error-leave-to {
+	opacity: 0;
+	transform: translateY(-60px);
+}
+
+.error-leave-active {
+	transition: all 0.3s ease-in;
+}
+
+@keyframes wobble {
+	0% {
+		transform: translateY(-60px);
+		opacity: 0;
+	}
+	50% {
+		transform: translateY(0px);
+		opacity: 1;
+	}
+	60% {
+		transform: translateX(8px);
+	}
+	70% {
+		transform: translateX(-8px);
+	}
+	80% {
+		transform: translateX(4px);
+	}
+	90% {
+		transform: translateX(-4px);
+	}
+	100% {
+		transform: translate(0);
+	}
+}
+
+/* swith transition */
+.switch-enter-from,
+.switch-enter-to {
+	opacity: 0;
+	transform: translateY(20px);
+}
+/* .switch-enter-to,
+.switch-leave-to {
+	opacity: 1;
+	transform: translateY(0);
+} */
+
+.switch-enter-active {
+	transition: all 0.3s ease;
+}
+.switch-leave-active {
+	transition: all 0.3s ease;
+}
+</style>

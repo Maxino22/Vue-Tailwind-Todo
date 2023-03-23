@@ -3,7 +3,7 @@
 		<table
 			class="bg-veryLightGray dark:bg-veryDarkBlue text-lg text-left text-gray-500 rounded-xl"
 		>
-			<tbody>
+			<transition-group tag="tbody" name="list" appear>
 				<draggable
 					v-model="myTodos"
 					item-key="todo"
@@ -40,7 +40,7 @@
 						</tr>
 					</template>
 				</draggable>
-			</tbody>
+			</transition-group>
 		</table>
 		<div
 			class="hidden md:flex justify-between items-center rounded-b-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
@@ -122,16 +122,6 @@ const myTodos = computed({
 	},
 })
 
-const showActive = () => {
-	store.Active = store.todos.filter((todo) => todo.status !== 'complete')
-	store.completed = null
-}
-
-const showCompleted = () => {
-	store.completed = store.todos.filter((todo) => todo.status !== 'complete')
-	store.Active = null
-}
-
 function deleteTodo(todoId) {
 	store.deleteTodo(todoId)
 }
@@ -147,3 +137,23 @@ const markTodo = (todo) => {
 	store.todos[index] = updatedTodo
 }
 </script>
+
+<style>
+.list-enter-from,
+.list-leave-to {
+	opacity: 0;
+}
+.list-enter-to,
+.list-leave-from {
+	opacity: 1;
+	transform: scale(1);
+}
+.list-enter-active,
+.list-leave-active {
+	transition: all 1s ease;
+	position: absolute;
+}
+.list-move {
+	transition: all 0.3s ease;
+}
+</style>

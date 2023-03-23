@@ -46,7 +46,9 @@ const useTodos = defineStore('todos', {
 			this.newTodo.id = newId
 			this.newTodo.status =
 				this.newTodo.status === true ? 'complete' : 'incomplete'
-			this.todos.unshift(this.newTodo)
+			if (this.newTodo.name) {
+				this.todos.unshift(this.newTodo)
+			}
 			this.newTodo = {
 				id: '',
 				status: '',
