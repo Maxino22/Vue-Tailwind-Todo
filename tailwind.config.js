@@ -27,10 +27,14 @@ module.exports = {
 				sans: ['Josefin Sans', 'sans-serif'],
 			},
 			backgroundImage: (theme) => ({
-				'header-desktop-dark': "url('assets/images/bg-desktop-dark.jpg')",
-				'header-mobile-dark': "url('assets/images/bg-mobile-dark.jpg')",
-				'header-desktop-light': "url('assets/images/bg-desktop-light.jpg')",
-				'header-mobile-light': "url('assets/images/bg-mobile-light.jpg')",
+				'header-desktop-dark':
+					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-desktop-dark_aislu7.jpg')",
+				'header-mobile-dark':
+					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-mobile-light_ifew6z.jpg')",
+				'header-desktop-light':
+					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-desktop-light_xifcwj.jpg')",
+				'header-mobile-light':
+					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-mobile-dark_crfktd.jpg')",
 			}),
 		},
 	},
