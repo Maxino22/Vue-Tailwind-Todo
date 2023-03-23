@@ -30,7 +30,9 @@
 		<div class="z-20 -mt-14 flex justify-center">
 			<TodoTable v-if="store.todos.length >= 1" />
 		</div>
-		<p class="text-center text-veryDarkGreyishBlueDM mt-2">
+		<p
+			class="text-center text-veryDarkGreyishBlueDM dark:text-veryLightGrayishBlue mt-2"
+		>
 			Drag and Drop to reorder list
 		</p>
 	</div>
