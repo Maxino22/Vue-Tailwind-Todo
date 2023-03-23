@@ -6,7 +6,7 @@ const useTodos = defineStore('todos', {
 			newTodo: {
 				id: null,
 				name: '',
-				status: '',
+				status: null,
 			},
 			todos: [
 				{ id: 1, name: 'Jog around the park 3x', status: 'incomplete' },
@@ -45,9 +45,9 @@ const useTodos = defineStore('todos', {
 		addTodo() {
 			const newId = this.todos.length + 1
 			this.newTodo.id = newId
-			this.newTodo.status = true ? 'complete' : 'incomplete'
+			this.newTodo.status =
+				this.newTodo.status === true ? 'complete' : 'incomplete'
 			this.todos.unshift(this.newTodo)
-			console.log(this.todos)
 			this.newTodo = {
 				id: '',
 				status: '',
