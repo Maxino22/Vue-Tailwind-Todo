@@ -82,6 +82,7 @@
 			class="md:hidden w-[352px] flex items-center justify-center space-x-4 mt-4 rounded-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
 		>
 			<p
+				@click="store.showAll"
 				class="text-md hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
 			>
 				All
