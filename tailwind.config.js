@@ -30,11 +30,11 @@ module.exports = {
 				'header-desktop-dark':
 					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-desktop-dark_aislu7.jpg')",
 				'header-mobile-dark':
-					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-mobile-light_ifew6z.jpg')",
+					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-mobile-dark_crfktd.jpg')",
 				'header-desktop-light':
 					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-desktop-light_xifcwj.jpg')",
 				'header-mobile-light':
-					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-mobile-dark_crfktd.jpg')",
+					"url('https://res.cloudinary.com/maxino/image/upload/v1679576446/Todo/bg-mobile-light_ifew6z.jpg')",
 			}),
 		},
 	},
