@@ -32,7 +32,7 @@
 								<button @click="deleteTodo(todo.element.id)" class="group">
 									<img
 										class="h-5 opacity-100 md:opacity-0 group-hover:opacity-100"
-										src="assets/images/icon-cross.svg"
+										src="../../public/assets/images/icon-cross.svg"
 										alt=""
 									/>
 								</button>
@@ -99,7 +99,7 @@
 
 <script setup>
 import draggable from 'vuedraggable'
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed } from 'vue'
 import useTodos from '../store/useTodos'
 
 const drag = ref(false)
