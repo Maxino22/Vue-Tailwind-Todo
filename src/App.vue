@@ -5,7 +5,7 @@
 		<section
 			class="p-20 flex flex-col items-center justify-center bg-header-mobile-light md:bg-header-desktop-light dark:bg-header-mobile-dark bg-no-repeat bg-cover dark:md:bg-header-desktop-dark"
 		>
-			<div class="flex items-center justify-between w-[450px] md:w-[600px]">
+			<div class="flex items-center justify-between w-[300px] md:w-[600px]">
 				<h3 class="text-white font-normal uppercase tracking-widest text-3xl">
 					Todo
 				</h3>
@@ -14,7 +14,7 @@
 				</button>
 			</div>
 			<div
-				class="w-[450px] md:w-[660px] mt-7 p-4 flex items-center space-x-7 bg-veryLightGray dark:bg-veryDarkDesaturatedBlue rounded-lg"
+				class="w-[350px] md:w-[660px] mt-7 p-4 flex items-center space-x-7 bg-veryLightGray dark:bg-veryDarkDesaturatedBlue rounded-lg"
 			>
 				<input v-model="store.newTodo.status" type="checkbox" />
 				<input

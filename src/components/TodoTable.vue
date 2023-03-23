@@ -26,7 +26,7 @@
 							</th>
 							<td
 								:class="textStyle(todo.element)"
-								class="py-4 w-[400px] md:w-[600px] rounded"
+								class="py-4 w-[300px] md:w-[600px] rounded"
 							>
 								{{ todo.element.name }}
 							</td>
@@ -63,7 +63,7 @@
 		</div>
 		<!-- mobile -->
 		<div
-			class="md:hidden w-[450px] flex justify-between items-center rounded-b-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
+			class="md:hidden w-[352px] flex justify-between items-center rounded-b-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
 		>
 			<p class="text-md">{{ store.incomplete.length }} items left</p>
 
@@ -71,7 +71,7 @@
 		</div>
 
 		<div
-			class="md:hidden w-[450px] flex items-center justify-center space-x-4 mt-4 rounded-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
+			class="md:hidden w-[352px] flex items-center justify-center space-x-4 mt-4 rounded-lg shadow-md bg-veryLightGray dark:bg-veryDarkDesaturatedBlue px-5 py-4"
 		>
 			<p
 				class="text-md hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
