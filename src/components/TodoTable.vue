@@ -26,9 +26,16 @@
 							</th>
 							<td
 								:class="textStyle(todo.element)"
-								class="py-4 w-[300px] md:w-[600px] rounded"
+								class="flex items-center justify-between py-4 pr-3 w-[300px] md:w-[600px] rounded"
 							>
 								{{ todo.element.name }}
+								<button @click="deleteTodo(todo.element.id)" class="group">
+									<img
+										class="h-5 opacity-100 md:opacity-0 group-hover:opacity-100"
+										src="assets/images/icon-cross.svg"
+										alt=""
+									/>
+								</button>
 							</td>
 						</tr>
 					</template>
@@ -41,18 +48,19 @@
 			<p class="text-md">{{ store.incomplete.length }} items left</p>
 			<div class="flex space-x-3">
 				<p
+					@click="store.showAll"
 					class="text-md cursor-pointer hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
 				>
 					All
 				</p>
 				<p
-					@click="showActive"
+					@click="store.showActive"
 					class="text-md cursor-pointer hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
 				>
 					Active
 				</p>
 				<p
-					@click="showCompleted"
+					@click="store.showComplete"
 					class="text-md cursor-pointer hover:text-veryDarkGreyishBlueDM dark:hover:text-veryDarkGreyishBlue"
 				>
 					Completed
@@ -78,9 +86,9 @@
 			>
 				All
 			</p>
-			<p @click="showActive" class="text-md">Active</p>
+			<p @click="store.showActive" class="text-md">Active</p>
 			<p
-				@click="showCompleted"
+				@click="store.showComplete"
 				class="text-md pointer dark:hover:text-veryDarkGreyishBlue"
 			>
 				Completed
@@ -113,11 +121,6 @@ const myTodos = computed({
 	},
 })
 
-const showAll = () => {
-	store.Active = null
-	store.completed = null
-}
-
 const showActive = () => {
 	store.Active = store.todos.filter((todo) => todo.status !== 'complete')
 	store.completed = null
@@ -128,10 +131,11 @@ const showCompleted = () => {
 	store.Active = null
 }
 
+function deleteTodo(todoId) {
+	store.deleteTodo(todoId)
+}
+
 // Watch for changes in store.active and store.completed
-watchEffect(() => {
-	showAll()
-})
 
 const markTodo = (todo) => {
 	const updatedTodo = {

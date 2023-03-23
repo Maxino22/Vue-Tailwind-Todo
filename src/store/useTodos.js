@@ -18,9 +18,9 @@ const useTodos = defineStore('todos', {
 					status: 'complete',
 				},
 			],
-			All: true,
-			Active: false,
-			completed: false,
+
+			Active: true,
+			completed: true,
 		}
 	},
 
@@ -29,7 +29,6 @@ const useTodos = defineStore('todos', {
 			return this.todos.filter((todo) => {
 				if (this.Active && todo.status === 'incomplete') return true
 				if (this.completed && todo.status === 'complete') return true
-				if (this.All) return true
 			})
 		},
 		incomplete() {
@@ -53,6 +52,25 @@ const useTodos = defineStore('todos', {
 				status: '',
 				name: '',
 			}
+		},
+
+		deleteTodo(id) {
+			const toBeDeleted = this.todos.findIndex((todo) => todo.id === id)
+			if (toBeDeleted !== -1) {
+				this.todos.splice(toBeDeleted, 1)
+			}
+		},
+		showAll() {
+			this.completed = true
+			this.Active = true
+		},
+		showActive() {
+			this.completed = false
+			this.Active = true
+		},
+		showComplete() {
+			this.completed = true
+			this.Active = false
 		},
 		clearComplete() {
 			const filteredCompleted = this.todos.filter(

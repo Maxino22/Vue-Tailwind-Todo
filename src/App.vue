@@ -28,7 +28,7 @@
 		</section>
 		<!-- section todos -->
 		<div class="z-20 -mt-14 flex justify-center">
-			<TodoTable />
+			<TodoTable v-if="store.todos.length >= 1" />
 		</div>
 		<p class="text-center text-veryDarkGreyishBlueDM mt-2">
 			Drag and Drop to reorder list
